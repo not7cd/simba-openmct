@@ -13,6 +13,7 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const request = require('request');
+const mavlinkServer = require('mavlink-openmct/server/mavlink-server.js');
 
 // Defaults
 options.port = options.port || options.p || 8080;
@@ -71,6 +72,12 @@ app.use(require('webpack-hot-middleware')(
 app.get('/', function (req, res) {
     fs.createReadStream('index.html').pipe(res);
 });
+
+mavlinkServer.install(app, {
+    type: 'udp',
+    address: '127.0.0.1',
+    port: 14540
+})
 
 // Finally, open the HTTP server and log the instance to the console
 app.listen(options.port, options.host, function() {
