@@ -76,7 +76,7 @@ app.get('/', function (req, res) {
 mavlinkServer.install(app, {
     type: 'udp',
     address: '127.0.0.1',
-    port: 14540
+    port: 14445
 })
 
 // Finally, open the HTTP server and log the instance to the console
